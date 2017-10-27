@@ -20,12 +20,6 @@
     </bean>
     
     <!-- jedis shard信息配置 -->
-
-   <!--  <bean id="jedisShardInfo" class="redis.clients.jedis.JedisShardInfo">
-        <constructor-arg index="0" value="219.135.163.219" />
-        <constructor-arg index="1" value="38873" type="int" />
-        <property name="password" value="dorong123" />
-    </bean> -->
     
     <bean id="jedisShardInfo" class="redis.clients.jedis.JedisShardInfo">
         <constructor-arg index="0" value="192.168.1.174" />
