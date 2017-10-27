@@ -1,0 +1,926 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dorong.mapper.localdata.LocalDataAnalyzerMapper">
+    <resultMap id="BaseResultMap" type="com.dorong.model.localdata.LocalDataAnalyzerDTO">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="user_code" property="user_code" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="idcard" property="idcard" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="INTEGER"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="shebei_cnt" property="shebei_cnt" jdbcType="INTEGER"/>
+        <result column="userdaikuan_cnt" property="userdaikuan_cnt" jdbcType="INTEGER"/>
+        <result column="core" property="core" jdbcType="INTEGER"/>
+        <result column="is_core_350_550" property="is_core_350_550" jdbcType="INTEGER"/>
+        <result column="app_cnt" property="app_cnt" jdbcType="INTEGER"/>
+        <result column="jiedai_app_cnt" property="jiedai_app_cnt" jdbcType="INTEGER"/>
+        <result column="jiedai_app_ratio" property="jiedai_app_ratio" jdbcType="INTEGER"/>
+        <result column="avg_month_contact_cnt" property="avg_month_contact_cnt" jdbcType="INTEGER"/>
+        <result column="avg_month_contact_shichang" property="avg_month_contact_shichang" jdbcType="INTEGER"/>
+        <result column="is_contact_in_one_month" property="is_contact_in_one_month" jdbcType="BIT"/>
+        <result column="dabanye_contact_cnt" property="dabanye_contact_cnt" jdbcType="INTEGER"/>
+        <result column="is_huchu_gaopin_yingxiao_phone" property="is_huchu_gaopin_yingxiao_phone" jdbcType="BIT"/>
+        <result column="is_has_jjlxr_in_thqd" property="is_has_jjlxr_in_thqd" jdbcType="BIT"/>
+        <result column="is_has_jjlxr_in_contact" property="is_has_jjlxr_in_contact" jdbcType="BIT"/>
+        <result column="phone_cnt" property="phone_cnt" jdbcType="INTEGER"/>
+        <result column="qinshu_phone_cnt" property="qinshu_phone_cnt" jdbcType="INTEGER"/>
+        <result column="jiedai_phone_cnt" property="jiedai_phone_cnt" jdbcType="INTEGER"/>
+        <result column="yinhang_phone_cnt" property="yinhang_phone_cnt" jdbcType="INTEGER"/>
+        <result column="browseurl_cnt" property="browseurl_cnt" jdbcType="INTEGER"/>
+        <result column="is_jiedai_url" property="is_jiedai_url" jdbcType="TINYINT"/>
+        <result column="jiedai_url_cnt" property="jiedai_url_cnt" jdbcType="INTEGER"/>
+        <result column="is_seqing_url" property="is_seqing_url" jdbcType="TINYINT"/>
+        <result column="seqing_url_cnt" property="seqing_url_cnt" jdbcType="INTEGER"/>
+        <result column="is_dubo_url" property="is_dubo_url" jdbcType="TINYINT"/>
+        <result column="dubo_url_cnt" property="dubo_url_cnt" jdbcType="INTEGER"/>
+        <result column="gpyx_phone_num" property="gpyx_phone_num" jdbcType="INTEGER"/>
+        <result column="gpyx_phone_cnt" property="gpyx_phone_cnt" jdbcType="INTEGER"/>
+        <result column="gpyx_phone_shichang" property="gpyx_phone_shichang" jdbcType="INTEGER"/>
+        <result column="gpyx_phone_cnt_ratio" property="gpyx_phone_cnt_ratio" jdbcType="INTEGER"/>
+        <result column="gpyx_phone_shichang_ratio" property="gpyx_phone_shichang_ratio" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, user_code, mobile, name, idcard, sex, age, shebei_cnt, userdaikuan_cnt, core, 
+    is_core_350_550, app_cnt, jiedai_app_cnt, jiedai_app_ratio, avg_month_contact_cnt, 
+    avg_month_contact_shichang, is_contact_in_one_month, dabanye_contact_cnt, is_huchu_gaopin_yingxiao_phone, 
+    is_has_jjlxr_in_thqd, is_has_jjlxr_in_contact, phone_cnt, qinshu_phone_cnt, jiedai_phone_cnt, 
+    yinhang_phone_cnt, browseurl_cnt, is_jiedai_url, jiedai_url_cnt, is_seqing_url, seqing_url_cnt, 
+    is_dubo_url, dubo_url_cnt, gpyx_phone_num, gpyx_phone_cnt, gpyx_phone_shichang, gpyx_phone_cnt_ratio, 
+    gpyx_phone_shichang_ratio
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from localdataanalyzer
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from localdataanalyzer
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.dorong.model.localdata.LocalDataAnalyzerDTO" useGeneratedKeys="true" keyProperty="id">
+    insert into localdataanalyzer (id, user_code, mobile, 
+      name, idcard, sex, 
+      age, shebei_cnt, userdaikuan_cnt, 
+      core, is_core_350_550, app_cnt, 
+      jiedai_app_cnt, jiedai_app_ratio, avg_month_contact_cnt, 
+      avg_month_contact_shichang, is_contact_in_one_month, 
+      dabanye_contact_cnt, is_huchu_gaopin_yingxiao_phone, 
+      is_has_jjlxr_in_thqd, is_has_jjlxr_in_contact, 
+      phone_cnt, qinshu_phone_cnt, jiedai_phone_cnt, 
+      yinhang_phone_cnt, browseurl_cnt, is_jiedai_url, 
+      jiedai_url_cnt, is_seqing_url, seqing_url_cnt, 
+      is_dubo_url, dubo_url_cnt, gpyx_phone_num, 
+      gpyx_phone_cnt, gpyx_phone_shichang, gpyx_phone_cnt_ratio, 
+      gpyx_phone_shichang_ratio,create_time)
+    values (#{id,jdbcType=INTEGER}, #{user_code,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{age,jdbcType=INTEGER}, #{shebei_cnt,jdbcType=INTEGER}, #{userdaikuan_cnt,jdbcType=INTEGER}, 
+      #{core,jdbcType=INTEGER}, #{is_core_350_550,jdbcType=INTEGER}, #{app_cnt,jdbcType=INTEGER}, 
+      #{jiedai_app_cnt,jdbcType=INTEGER}, #{jiedai_app_ratio,jdbcType=INTEGER}, #{avg_month_contact_cnt,jdbcType=INTEGER}, 
+      #{avg_month_contact_shichang,jdbcType=INTEGER}, #{is_contact_in_one_month,jdbcType=BIT}, 
+      #{dabanye_contact_cnt,jdbcType=INTEGER}, #{is_huchu_gaopin_yingxiao_phone,jdbcType=BIT}, 
+      #{is_has_jjlxr_in_thqd,jdbcType=BIT}, #{is_has_jjlxr_in_contact,jdbcType=BIT}, 
+      #{phone_cnt,jdbcType=INTEGER}, #{qinshu_phone_cnt,jdbcType=INTEGER}, #{jiedai_phone_cnt,jdbcType=INTEGER}, 
+      #{yinhang_phone_cnt,jdbcType=INTEGER}, #{browseurl_cnt,jdbcType=INTEGER}, #{is_jiedai_url,jdbcType=TINYINT}, 
+      #{jiedai_url_cnt,jdbcType=INTEGER}, #{is_seqing_url,jdbcType=TINYINT}, #{seqing_url_cnt,jdbcType=INTEGER}, 
+      #{is_dubo_url,jdbcType=TINYINT}, #{dubo_url_cnt,jdbcType=INTEGER}, #{gpyx_phone_num,jdbcType=INTEGER}, 
+      #{gpyx_phone_cnt,jdbcType=INTEGER}, #{gpyx_phone_shichang,jdbcType=INTEGER}, #{gpyx_phone_cnt_ratio,jdbcType=INTEGER}, 
+      #{gpyx_phone_shichang_ratio,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}) ON DUPLICATE KEY UPDATE
+        <trim suffixOverrides=",">
+            <if test="mobile != null">
+                mobile = VALUES(mobile),
+            </if>
+            <if test="name != null">
+                name = VALUES(name),
+            </if>
+            <if test="idcard != null">
+                idcard = VALUES(idcard),
+            </if>
+            <if test="sex != null">
+                sex = VALUES(sex),
+            </if>
+            <if test="age != null">
+                age = VALUES(age),
+            </if>
+            <if test="shebei_cnt != null">
+                shebei_cnt = VALUES(shebei_cnt),
+            </if>
+            <if test="userdaikuan_cnt != null">
+                userdaikuan_cnt = VALUES(userdaikuan_cnt),
+            </if>
+            <if test="core != null">
+                core = VALUES(core),
+            </if>
+            <if test="is_core_350_550 != null">
+                is_core_350_550 = VALUES(is_core_350_550),
+            </if>
+            <if test="app_cnt != null">
+                app_cnt = VALUES(app_cnt),
+            </if>
+            <if test="jiedai_app_cnt != null">
+                jiedai_app_cnt = VALUES(jiedai_app_cnt),
+            </if>
+            <if test="jiedai_app_ratio != null">
+                jiedai_app_ratio = VALUES(jiedai_app_ratio),
+            </if>
+            <if test="avg_month_contact_cnt != null">
+                avg_month_contact_cnt = VALUES(avg_month_contact_cnt),
+            </if>
+            <if test="avg_month_contact_shichang != null">
+                avg_month_contact_shichang = VALUES(avg_month_contact_shichang),
+            </if>
+            <if test="is_contact_in_one_month != null">
+                is_contact_in_one_month = VALUES(is_contact_in_one_month),
+            </if>
+            <if test="dabanye_contact_cnt != null">
+                dabanye_contact_cnt = VALUES(dabanye_contact_cnt),
+            </if>
+            <if test="is_huchu_gaopin_yingxiao_phone != null">
+                is_huchu_gaopin_yingxiao_phone = VALUES(is_huchu_gaopin_yingxiao_phone),
+            </if>
+            <if test="is_has_jjlxr_in_thqd != null">
+                is_has_jjlxr_in_thqd = VALUES(is_has_jjlxr_in_thqd),
+            </if>
+            <if test="is_has_jjlxr_in_contact != null">
+                is_has_jjlxr_in_contact = VALUES(is_has_jjlxr_in_contact),
+            </if>
+            <if test="phone_cnt != null">
+                phone_cnt = VALUES(phone_cnt),
+            </if>
+            <if test="qinshu_phone_cnt != null">
+                qinshu_phone_cnt = VALUES(qinshu_phone_cnt),
+            </if>
+            <if test="jiedai_phone_cnt != null">
+                jiedai_phone_cnt = VALUES(jiedai_phone_cnt),
+            </if>
+            <if test="yinhang_phone_cnt != null">
+                yinhang_phone_cnt = VALUES(yinhang_phone_cnt),
+            </if>
+            <if test="browseurl_cnt != null">
+                browseurl_cnt = VALUES(browseurl_cnt),
+            </if>
+            <if test="is_jiedai_url != null">
+                is_jiedai_url = VALUES(is_jiedai_url),
+            </if>
+            <if test="jiedai_url_cnt != null">
+                jiedai_url_cnt = VALUES(jiedai_url_cnt),
+            </if>
+            <if test="is_seqing_url != null">
+                is_seqing_url = VALUES(is_seqing_url),
+            </if>
+            <if test="seqing_url_cnt != null">
+                seqing_url_cnt = VALUES(seqing_url_cnt),
+            </if>
+            <if test="is_dubo_url != null">
+                is_dubo_url = VALUES(is_dubo_url),
+            </if>
+            <if test="dubo_url_cnt != null">
+                dubo_url_cnt = VALUES(dubo_url_cnt),
+            </if>
+            <if test="gpyx_phone_num != null">
+                gpyx_phone_num = VALUES(gpyx_phone_num),
+            </if>
+            <if test="gpyx_phone_cnt != null">
+                gpyx_phone_cnt = VALUES(gpyx_phone_cnt),
+            </if>
+            <if test="gpyx_phone_shichang != null">
+                gpyx_phone_shichang = VALUES(gpyx_phone_shichang),
+            </if>
+            <if test="gpyx_phone_cnt_ratio != null">
+                gpyx_phone_cnt_ratio = VALUES(gpyx_phone_cnt_ratio),
+            </if>
+            <if test="gpyx_phone_shichang_ratio != null">
+                gpyx_phone_shichang_ratio = VALUES(gpyx_phone_shichang_ratio),
+            </if>
+        </trim>
+  </insert>
+    <insert id="insertSelective" parameterType="com.dorong.model.localdata.LocalDataAnalyzerDTO">
+        insert into localdataanalyzer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="user_code != null">
+                user_code,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="idcard != null">
+                idcard,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="age != null">
+                age,
+            </if>
+            <if test="shebei_cnt != null">
+                shebei_cnt,
+            </if>
+            <if test="userdaikuan_cnt != null">
+                userdaikuan_cnt,
+            </if>
+            <if test="core != null">
+                core,
+            </if>
+            <if test="is_core_350_550 != null">
+                is_core_350_550,
+            </if>
+            <if test="app_cnt != null">
+                app_cnt,
+            </if>
+            <if test="jiedai_app_cnt != null">
+                jiedai_app_cnt,
+            </if>
+            <if test="jiedai_app_ratio != null">
+                jiedai_app_ratio,
+            </if>
+            <if test="avg_month_contact_cnt != null">
+                avg_month_contact_cnt,
+            </if>
+            <if test="avg_month_contact_shichang != null">
+                avg_month_contact_shichang,
+            </if>
+            <if test="is_contact_in_one_month != null">
+                is_contact_in_one_month,
+            </if>
+            <if test="dabanye_contact_cnt != null">
+                dabanye_contact_cnt,
+            </if>
+            <if test="is_huchu_gaopin_yingxiao_phone != null">
+                is_huchu_gaopin_yingxiao_phone,
+            </if>
+            <if test="is_has_jjlxr_in_thqd != null">
+                is_has_jjlxr_in_thqd,
+            </if>
+            <if test="is_has_jjlxr_in_contact != null">
+                is_has_jjlxr_in_contact,
+            </if>
+            <if test="phone_cnt != null">
+                phone_cnt,
+            </if>
+            <if test="qinshu_phone_cnt != null">
+                qinshu_phone_cnt,
+            </if>
+            <if test="jiedai_phone_cnt != null">
+                jiedai_phone_cnt,
+            </if>
+            <if test="yinhang_phone_cnt != null">
+                yinhang_phone_cnt,
+            </if>
+            <if test="browseurl_cnt != null">
+                browseurl_cnt,
+            </if>
+            <if test="is_jiedai_url != null">
+                is_jiedai_url,
+            </if>
+            <if test="jiedai_url_cnt != null">
+                jiedai_url_cnt,
+            </if>
+            <if test="is_seqing_url != null">
+                is_seqing_url,
+            </if>
+            <if test="seqing_url_cnt != null">
+                seqing_url_cnt,
+            </if>
+            <if test="is_dubo_url != null">
+                is_dubo_url,
+            </if>
+            <if test="dubo_url_cnt != null">
+                dubo_url_cnt,
+            </if>
+            <if test="gpyx_phone_num != null">
+                gpyx_phone_num,
+            </if>
+            <if test="gpyx_phone_cnt != null">
+                gpyx_phone_cnt,
+            </if>
+            <if test="gpyx_phone_shichang != null">
+                gpyx_phone_shichang,
+            </if>
+            <if test="gpyx_phone_cnt_ratio != null">
+                gpyx_phone_cnt_ratio,
+            </if>
+            <if test="gpyx_phone_shichang_ratio != null">
+                gpyx_phone_shichang_ratio,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="user_code != null">
+                #{user_code,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null">
+                #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                #{age,jdbcType=INTEGER},
+            </if>
+            <if test="shebei_cnt != null">
+                #{shebei_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="userdaikuan_cnt != null">
+                #{userdaikuan_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="core != null">
+                #{core,jdbcType=INTEGER},
+            </if>
+            <if test="is_core_350_550 != null">
+                #{is_core_350_550,jdbcType=INTEGER},
+            </if>
+            <if test="app_cnt != null">
+                #{app_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="jiedai_app_cnt != null">
+                #{jiedai_app_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="jiedai_app_ratio != null">
+                #{jiedai_app_ratio,jdbcType=INTEGER},
+            </if>
+            <if test="avg_month_contact_cnt != null">
+                #{avg_month_contact_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="avg_month_contact_shichang != null">
+                #{avg_month_contact_shichang,jdbcType=INTEGER},
+            </if>
+            <if test="is_contact_in_one_month != null">
+                #{is_contact_in_one_month,jdbcType=BIT},
+            </if>
+            <if test="dabanye_contact_cnt != null">
+                #{dabanye_contact_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_huchu_gaopin_yingxiao_phone != null">
+                #{is_huchu_gaopin_yingxiao_phone,jdbcType=BIT},
+            </if>
+            <if test="is_has_jjlxr_in_thqd != null">
+                #{is_has_jjlxr_in_thqd,jdbcType=BIT},
+            </if>
+            <if test="is_has_jjlxr_in_contact != null">
+                #{is_has_jjlxr_in_contact,jdbcType=BIT},
+            </if>
+            <if test="phone_cnt != null">
+                #{phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="qinshu_phone_cnt != null">
+                #{qinshu_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="jiedai_phone_cnt != null">
+                #{jiedai_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="yinhang_phone_cnt != null">
+                #{yinhang_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="browseurl_cnt != null">
+                #{browseurl_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_jiedai_url != null">
+                #{is_jiedai_url,jdbcType=TINYINT},
+            </if>
+            <if test="jiedai_url_cnt != null">
+                #{jiedai_url_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_seqing_url != null">
+                #{is_seqing_url,jdbcType=TINYINT},
+            </if>
+            <if test="seqing_url_cnt != null">
+                #{seqing_url_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_dubo_url != null">
+                #{is_dubo_url,jdbcType=TINYINT},
+            </if>
+            <if test="dubo_url_cnt != null">
+                #{dubo_url_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_num != null">
+                #{gpyx_phone_num,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_cnt != null">
+                #{gpyx_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_shichang != null">
+                #{gpyx_phone_shichang,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_cnt_ratio != null">
+                #{gpyx_phone_cnt_ratio,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_shichang_ratio != null">
+                #{gpyx_phone_shichang_ratio,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dorong.model.localdata.LocalDataAnalyzerDTO">
+        update localdataanalyzer
+        <set>
+            <if test="user_code != null">
+                user_code = #{user_code,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="idcard != null">
+                idcard = #{idcard,jdbcType=VARCHAR},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=INTEGER},
+            </if>
+            <if test="age != null">
+                age = #{age,jdbcType=INTEGER},
+            </if>
+            <if test="shebei_cnt != null">
+                shebei_cnt = #{shebei_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="userdaikuan_cnt != null">
+                userdaikuan_cnt = #{userdaikuan_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="core != null">
+                core = #{core,jdbcType=INTEGER},
+            </if>
+            <if test="is_core_350_550 != null">
+                is_core_350_550 = #{is_core_350_550,jdbcType=INTEGER},
+            </if>
+            <if test="app_cnt != null">
+                app_cnt = #{app_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="jiedai_app_cnt != null">
+                jiedai_app_cnt = #{jiedai_app_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="jiedai_app_ratio != null">
+                jiedai_app_ratio = #{jiedai_app_ratio,jdbcType=INTEGER},
+            </if>
+            <if test="avg_month_contact_cnt != null">
+                avg_month_contact_cnt = #{avg_month_contact_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="avg_month_contact_shichang != null">
+                avg_month_contact_shichang = #{avg_month_contact_shichang,jdbcType=INTEGER},
+            </if>
+            <if test="is_contact_in_one_month != null">
+                is_contact_in_one_month = #{is_contact_in_one_month,jdbcType=BIT},
+            </if>
+            <if test="dabanye_contact_cnt != null">
+                dabanye_contact_cnt = #{dabanye_contact_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_huchu_gaopin_yingxiao_phone != null">
+                is_huchu_gaopin_yingxiao_phone = #{is_huchu_gaopin_yingxiao_phone,jdbcType=BIT},
+            </if>
+            <if test="is_has_jjlxr_in_thqd != null">
+                is_has_jjlxr_in_thqd = #{is_has_jjlxr_in_thqd,jdbcType=BIT},
+            </if>
+            <if test="is_has_jjlxr_in_contact != null">
+                is_has_jjlxr_in_contact = #{is_has_jjlxr_in_contact,jdbcType=BIT},
+            </if>
+            <if test="phone_cnt != null">
+                phone_cnt = #{phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="qinshu_phone_cnt != null">
+                qinshu_phone_cnt = #{qinshu_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="jiedai_phone_cnt != null">
+                jiedai_phone_cnt = #{jiedai_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="yinhang_phone_cnt != null">
+                yinhang_phone_cnt = #{yinhang_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="browseurl_cnt != null">
+                browseurl_cnt = #{browseurl_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_jiedai_url != null">
+                is_jiedai_url = #{is_jiedai_url,jdbcType=TINYINT},
+            </if>
+            <if test="jiedai_url_cnt != null">
+                jiedai_url_cnt = #{jiedai_url_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_seqing_url != null">
+                is_seqing_url = #{is_seqing_url,jdbcType=TINYINT},
+            </if>
+            <if test="seqing_url_cnt != null">
+                seqing_url_cnt = #{seqing_url_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="is_dubo_url != null">
+                is_dubo_url = #{is_dubo_url,jdbcType=TINYINT},
+            </if>
+            <if test="dubo_url_cnt != null">
+                dubo_url_cnt = #{dubo_url_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_num != null">
+                gpyx_phone_num = #{gpyx_phone_num,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_cnt != null">
+                gpyx_phone_cnt = #{gpyx_phone_cnt,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_shichang != null">
+                gpyx_phone_shichang = #{gpyx_phone_shichang,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_cnt_ratio != null">
+                gpyx_phone_cnt_ratio = #{gpyx_phone_cnt_ratio,jdbcType=INTEGER},
+            </if>
+            <if test="gpyx_phone_shichang_ratio != null">
+                gpyx_phone_shichang_ratio = #{gpyx_phone_shichang_ratio,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dorong.model.localdata.LocalDataAnalyzerDTO">
+    update localdataanalyzer
+    set user_code = #{user_code,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      age = #{age,jdbcType=INTEGER},
+      shebei_cnt = #{shebei_cnt,jdbcType=INTEGER},
+      userdaikuan_cnt = #{userdaikuan_cnt,jdbcType=INTEGER},
+      core = #{core,jdbcType=INTEGER},
+      is_core_350_550 = #{is_core_350_550,jdbcType=INTEGER},
+      app_cnt = #{app_cnt,jdbcType=INTEGER},
+      jiedai_app_cnt = #{jiedai_app_cnt,jdbcType=INTEGER},
+      jiedai_app_ratio = #{jiedai_app_ratio,jdbcType=INTEGER},
+      avg_month_contact_cnt = #{avg_month_contact_cnt,jdbcType=INTEGER},
+      avg_month_contact_shichang = #{avg_month_contact_shichang,jdbcType=INTEGER},
+      is_contact_in_one_month = #{is_contact_in_one_month,jdbcType=BIT},
+      dabanye_contact_cnt = #{dabanye_contact_cnt,jdbcType=INTEGER},
+      is_huchu_gaopin_yingxiao_phone = #{is_huchu_gaopin_yingxiao_phone,jdbcType=BIT},
+      is_has_jjlxr_in_thqd = #{is_has_jjlxr_in_thqd,jdbcType=BIT},
+      is_has_jjlxr_in_contact = #{is_has_jjlxr_in_contact,jdbcType=BIT},
+      phone_cnt = #{phone_cnt,jdbcType=INTEGER},
+      qinshu_phone_cnt = #{qinshu_phone_cnt,jdbcType=INTEGER},
+      jiedai_phone_cnt = #{jiedai_phone_cnt,jdbcType=INTEGER},
+      yinhang_phone_cnt = #{yinhang_phone_cnt,jdbcType=INTEGER},
+      browseurl_cnt = #{browseurl_cnt,jdbcType=INTEGER},
+      is_jiedai_url = #{is_jiedai_url,jdbcType=TINYINT},
+      jiedai_url_cnt = #{jiedai_url_cnt,jdbcType=INTEGER},
+      is_seqing_url = #{is_seqing_url,jdbcType=TINYINT},
+      seqing_url_cnt = #{seqing_url_cnt,jdbcType=INTEGER},
+      is_dubo_url = #{is_dubo_url,jdbcType=TINYINT},
+      dubo_url_cnt = #{dubo_url_cnt,jdbcType=INTEGER},
+      gpyx_phone_num = #{gpyx_phone_num,jdbcType=INTEGER},
+      gpyx_phone_cnt = #{gpyx_phone_cnt,jdbcType=INTEGER},
+      gpyx_phone_shichang = #{gpyx_phone_shichang,jdbcType=INTEGER},
+      gpyx_phone_cnt_ratio = #{gpyx_phone_cnt_ratio,jdbcType=INTEGER},
+      gpyx_phone_shichang_ratio = #{gpyx_phone_shichang_ratio,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectBase" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            *
+        FROM
+            ${baseTable}
+        WHERE
+            id = #{baseId,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAPPS" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT R.*,
+            jiedai_app_cnt / app_cnt * 100 AS jiedai_app_ratio FROM(
+				SELECT
+                    COUNT(T.app_name) AS app_cnt,
+                    SUM(
+                        CASE
+                        WHEN t.app_name = jd.appname THEN
+                            1
+                        ELSE
+                            0
+                        END
+                    ) AS jiedai_app_cnt
+                FROM
+                    (
+                        SELECT
+                            app_name
+                        FROM
+                            ${APPS}
+                        WHERE
+                            base_id = #{baseId,jdbcType=INTEGER} GROUP BY app_name)
+                            T
+                        LEFT JOIN jqb_jiedaiapp_dict jd ON T.app_name = jd.appname
+                    ) R
+    </select>
+
+    <select id="selectTHQDAvg" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        round(
+        t2.contact_cnt / t2.diff_month,
+        0
+        ) AS avg_month_contact_cnt,
+        round(
+        t2.contact_shichang / t2.diff_month,
+        0
+        ) AS avg_month_contact_shichang
+        FROM
+        (
+        SELECT
+        count(t1.number) AS contact_cnt,
+        sum(t1.duration) AS contact_shichang,
+        timestampdiff(
+        MONTH,
+        min(t1.date),
+        max(t1.date)
+        ) + 1 AS diff_month
+        FROM
+        (
+        SELECT
+        base_id,
+        date,
+        number,
+        duration
+        FROM
+        ${THQD}
+        WHERE
+        base_id = #{baseId,jdbcType=INTEGER}
+        AND date &lt;= now()
+        AND date &gt;= date_sub(now(), INTERVAL 364 DAY)
+        AND number &lt;&gt; ''
+        AND type IN (1, 2, 3)
+        ) t1
+        ) t2
+  </select>
+
+    <select id="selectTHQDis_contact_in_one_month" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        IF (
+        min(t1.date) >= date_sub(now(), INTERVAL 29 DAY),
+        1,
+        0
+        ) AS is_contact_in_one_month
+        FROM
+        (
+        SELECT
+        base_id,
+        date,
+        number
+        FROM
+        ${THQD}
+        WHERE
+        date &lt;= now()
+        AND type IN (1, 2, 3)
+        AND base_id = #{baseId,jdbcType=INTEGER}
+        ) t1
+  </select>
+
+    <select id="selectTHQDdabanye_contact_cnt" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        count(t1.number) AS dabanye_contact_cnt
+        FROM
+        (
+        SELECT
+        base_id,
+        date,
+        number
+        FROM
+        ${THQD}
+        WHERE
+        substr(date, 1, 10) &gt;= date_sub(now(), INTERVAL 364 DAY)
+        AND substr(date, 1, 10) &lt;= now()
+        AND HOUR (date) &gt;= 0
+        AND HOUR (date) &lt; 6
+        AND type IN (1, 2)
+        AND base_id = #{baseId,jdbcType=INTEGER}
+        ) t1
+    </select>
+
+    <select id="selectTHQDis_huchu_gaopin_yingxiao_phone" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT DISTINCT
+        1 AS is_huchu_gaopin_yingxiao_phone
+        FROM
+        (
+        SELECT DISTINCT
+        base_id,
+        number
+        FROM
+        ${THQD}
+        WHERE
+        type = 2
+        AND base_id = #{baseId,jdbcType=INTEGER}
+        AND number &lt;&gt; ''
+        AND length(number) NOT IN (1, 2, 3, 4, 5, 6)
+        ) t1
+        INNER JOIN (
+        SELECT
+        number
+        FROM
+        jqb_tonghua_qingdan_gaopin_yingxiao_phone
+        WHERE
+        cnt1 >= 20
+        ) t2 ON t1.number = t2.number
+    </select>
+
+    <select id="selectTHQDis_has_jjlxr_in_thqd" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        IF (
+        count(t2.mobile) = sum(t2.is_has_tonghua_qingdan),
+        1,
+        0
+        ) AS is_has_jjlxr_in_thqd
+        FROM
+        (
+        SELECT
+        ju.mobile,
+
+        IF (ju.mobile = t1.number, 1, 0) AS is_has_tonghua_qingdan
+        FROM
+        jqb_usercontact ju
+        LEFT JOIN (
+        SELECT
+        base_id,
+        date,
+        number
+        FROM
+        ${THQD}
+        WHERE
+        substr(date, 1, 10) &gt;= date_sub(now(), INTERVAL 364 DAY)
+        AND substr(date, 1, 10) &lt;= now()
+        AND HOUR (date) &gt;= 0
+        AND HOUR (date) &lt;= 6
+        AND type IN (1, 2)
+        AND base_id = #{baseId,jdbcType=INTEGER}
+        ) t1 ON ju.usercode = #{userCode,jdbcType=VARCHAR}
+        ) t2
+    </select>
+
+    <select id="selectTXLis_has_jjlxr_in_contact" parameterType="java.util.Map" resultType="java.util.Map">
+        select
+        if(count(t2.mobile) = sum(is_has_contact), 1, 0) as is_has_jjlxr_in_contact
+        from
+        (
+        select
+        ju.mobile,
+        if(ju.mobile = t1.mobile, 1, 0) as is_has_contact
+        from jqb_usercontact ju
+        left join
+        (
+        select
+        distinct base_id,
+        mobile
+        from ${TXL}
+            WHERE base_id = #{baseId,jdbcType=INTEGER}
+        ) t1
+        on ju.usercode = #{userCode,jdbcType=VARCHAR}
+        ) t2
+    </select>
+
+    <select id="selectTXLphone_cnt" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+            count(DISTINCT mobile) AS phone_cnt,
+            count(
+                DISTINCT
+                IF (
+                    customername LIKE '%爸%'
+                    OR customername LIKE '%妈%'
+                    OR customername LIKE '%爹%'
+                    OR customername LIKE '%娘%',
+                    t1.mobile,
+                    NULL
+                )
+            ) AS qinshu_phone_cnt,
+            count(
+                DISTINCT
+                IF (
+                    customername LIKE '%贷%'
+                    OR customername LIKE '%借%',
+                    t1.mobile,
+                    NULL
+                )
+            ) AS jiedai_phone_cnt,
+            count(
+                DISTINCT
+                IF (
+                    customername LIKE '%银行%',
+                    t1.mobile,
+                    NULL
+                )
+            ) AS yinhang_phone_cnt
+        FROM
+            (
+                SELECT DISTINCT
+                    base_id,
+                    customername,
+                    mobile
+                FROM
+                    ${TXL}
+                WHERE
+                    base_id = #{baseId,jdbcType=INTEGER}
+            ) t1
+  </select>
+
+    <select id="selectBrowserData" parameterType="java.util.Map" resultType="java.util.Map">
+        SELECT
+        count(t4.`host`) AS browseurl_cnt,
+        max(jiedai_flag) AS is_jiedai_url,
+        sum(jiedai_flag) AS jiedai_url_cnt,
+        max(seqing_flag) AS is_seqing_url,
+        sum(seqing_flag) AS seqing_url_cnt,
+        max(dubo_flag) AS is_dubo_url,
+        sum(dubo_flag) AS dubo_url_cnt
+        FROM
+        (
+        SELECT
+        t2.`host`,
+        IF (
+        t2.`host` = t3.url
+        AND t3.type = '借贷类',
+        1,
+        0
+        ) AS jiedai_flag,
+
+        IF (
+        t2.`host` = t3.url
+        AND t3.type = '色情类',
+        1,
+        0
+        ) AS seqing_flag,
+
+        IF (
+        t2.`host` = t3.url
+        AND t3.type = '赌博类',
+        1,
+        0
+        ) AS dubo_flag
+        FROM
+        (
+        SELECT
+        `host`
+        FROM
+        ${BROWSER}
+        WHERE
+        url &lt;&gt; ''
+        AND base_id = #{baseId,jdbcType=INTEGER}
+        AND should_analy = 1
+        ) t2
+        LEFT JOIN (
+        SELECT
+        url,
+        type
+        FROM
+        jqb_url_type
+        ) t3 ON t2.`host` = t3.url
+        ) t4
+    </select>
+
+    <select id="selectYYSData" parameterType="java.util.Map" resultType="java.util.Map">
+            SELECT
+            count(
+                DISTINCT
+                IF (
+                    flag = 1,
+                    tab1.other_cell_phone,
+                    NULL
+                )
+            ) AS gpyx_phone_num,
+            count(
+
+                IF (
+                    flag = 1,
+                    tab1.other_cell_phone,
+                    NULL
+                )
+            ) AS gpyx_phone_cnt,
+            sum(IF(flag = 1, tab1.use_time, 0)) AS gpyx_phone_shichang,
+            count(
+
+                IF (
+                    flag = 1,
+                    tab1.other_cell_phone,
+                    NULL
+                )
+            ) / count(tab1.other_cell_phone) AS gpyx_phone_cnt_ratio,
+            sum(IF(flag = 1, tab1.use_time, 0)) / sum(tab1.other_cell_phone) AS gpyx_phone_shichang_ratio
+        FROM
+            (
+                SELECT
+                    user_code,
+                    other_cell_phone,
+                    use_time,
+                    init_type,
+
+                IF (
+                    t1.other_cell_phone = t2.number,
+                    1,
+                    0
+                ) AS flag
+                FROM
+                    ${YYS_CALL} t1
+                LEFT JOIN jqb_tonghua_qingdan_gaopin_yingxiao_phone t2 ON t1.other_cell_phone = t2.number
+                WHERE
+                    t1.user_code =  #{userCode,jdbcType=VARCHAR}
+            ) tab1
+    </select>
+</mapper>

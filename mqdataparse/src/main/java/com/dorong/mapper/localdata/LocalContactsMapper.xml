@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorong.mapper.localdata.LocalContactsMapper">
+  <resultMap id="BaseResultMap" type="com.dorong.model.localdata.LocalContacts">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="base_id" jdbcType="INTEGER" property="base_id" />
+    <result column="customername" jdbcType="VARCHAR" property="customername" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, base_id, customername, mobile, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from localcontacts
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from localcontacts
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dorong.model.localdata.LocalContacts" useGeneratedKeys="true" keyProperty="id">
+    insert into ${tableName} (id, base_id, customername,
+      mobile, create_time)
+    values (#{id,jdbcType=INTEGER}, #{base_id,jdbcType=INTEGER}, #{customername,jdbcType=VARCHAR}, 
+      #{mobile,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dorong.model.localdata.LocalContacts">
+    insert into localcontacts
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="base_id != null">
+        base_id,
+      </if>
+      <if test="customername != null">
+        customername,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="base_id != null">
+        #{base_id,jdbcType=INTEGER},
+      </if>
+      <if test="customername != null">
+        #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dorong.model.localdata.LocalContacts">
+    update localcontacts
+    <set>
+      <if test="base_id != null">
+        base_id = #{base_id,jdbcType=INTEGER},
+      </if>
+      <if test="customername != null">
+        customername = #{customername,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dorong.model.localdata.LocalContacts">
+    update ${tableName}
+    set base_id = #{base_id,jdbcType=INTEGER},
+      customername = #{customername,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="createTable" parameterType="java.lang.String" >
+    CREATE TABLE IF NOT EXISTS ${tableName} (
+      `id` bigint(20) NOT NULL AUTO_INCREMENT,
+      `base_id` int(20) NOT NULL COMMENT 'base表ID',
+      `customername` varchar(100) DEFAULT NULL COMMENT '联系人姓名',
+      `mobile` varchar(50) DEFAULT NULL COMMENT '手机号码',
+      `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+      PRIMARY KEY (`id`),
+      KEY `mobile_index` (`mobile`) USING BTREE,
+      KEY `base_id_index` (`base_id`) USING BTREE
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  </update>
+
+  <insert id="batchInsert">
+    INSERT INTO ${tableName} (id, base_id, customername,
+    mobile, create_time)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.base_id,jdbcType=INTEGER}, #{item.customername,jdbcType=VARCHAR},
+      #{item.mobile,jdbcType=VARCHAR}, #{item.create_time,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+</mapper>

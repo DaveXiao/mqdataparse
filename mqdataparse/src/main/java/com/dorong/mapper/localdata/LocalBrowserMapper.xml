@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorong.mapper.localdata.LocalBrowserMapper">
+  <resultMap id="BaseResultMap" type="com.dorong.model.localdata.LocalBrowser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="base_id" jdbcType="INTEGER" property="base_id" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="host" jdbcType="VARCHAR" property="host" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="should_analy" jdbcType="INTEGER" property="should_analy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, base_id, url, host, path, should_analy, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from localbrowser
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from localbrowser
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dorong.model.localdata.LocalBrowser" useGeneratedKeys="true" keyProperty="id">
+    insert into ${tableName} (id, base_id, url,
+      host, path, should_analy, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{base_id,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, 
+      #{host,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{should_analy,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dorong.model.localdata.LocalBrowser">
+    insert into localbrowser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="base_id != null">
+        base_id,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="host != null">
+        host,
+      </if>
+      <if test="path != null">
+        path,
+      </if>
+      <if test="should_analy != null">
+        should_analy,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="base_id != null">
+        #{base_id,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="should_analy != null">
+        #{should_analy,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dorong.model.localdata.LocalBrowser">
+    update localbrowser
+    <set>
+      <if test="base_id != null">
+        base_id = #{base_id,jdbcType=INTEGER},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="host != null">
+        host = #{host,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="should_analy != null">
+        should_analy = #{should_analy,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dorong.model.localdata.LocalBrowser">
+    update ${tableName}
+    set base_id = #{base_id,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      host = #{host,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      should_analy = #{should_analy,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="createTable" parameterType="java.lang.String" >
+    CREATE TABLE IF NOT EXISTS ${tableName} (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `base_id` int(20) NOT NULL COMMENT 'base表ID',
+    `url` varchar(512) DEFAULT NULL COMMENT '访问url地址',
+    `host` varchar(100) DEFAULT NULL COMMENT 'url-host主机地址',
+    `path` varchar(512) DEFAULT NULL COMMENT 'url路径',
+    `should_analy` int(3) DEFAULT NULL COMMENT '是否需要分析',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    KEY `host_index` (`host`) USING BTREE,
+    KEY `base_id_index` (`base_id`) USING BTREE,
+    KEY `should_analy_index` (`should_analy`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  </update>
+
+  <insert id="batchInsert">
+    INSERT INTO ${tableName} (id, base_id, url,
+    host, path, should_analy, create_time)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.base_id,jdbcType=INTEGER}, #{item.url,jdbcType=VARCHAR},
+      #{item.host,jdbcType=VARCHAR}, #{item.path,jdbcType=VARCHAR}, #{item.should_analy,jdbcType=INTEGER},
+      #{item.create_time,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+</mapper>

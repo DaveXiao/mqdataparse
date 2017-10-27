@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 查找最新的schemaLocation 访问 http://www.springframework.org/schema/ -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:amq="http://activemq.apache.org/schema/core"
+	xmlns:jms="http://www.springframework.org/schema/jms"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/jms
+        http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
+        http://activemq.apache.org/schema/core
+        http://activemq.apache.org/schema/core/activemq-core-5.9.0.xsd">
+	<!-- <amq:connectionFactory id="amqConnectionFactory"
+		brokerURL="tcp://219.135.163.219:38871" userName="admin" password="admin" /> -->
+	
+	<amq:connectionFactory id="amqConnectionFactory"
+		brokerURL="tcp://192.168.1.174:61616" userName="admin" password="admin" />
+
+	<bean id="connectionFactory"
+		class="org.springframework.jms.connection.CachingConnectionFactory">
+		<constructor-arg ref="amqConnectionFactory" />
+		<property name="sessionCacheSize" value="100" />
+	</bean>
+	
+	<!-- ====Producer side start====-->
+
+	<!-- 定义JmsTemplate的Queue类型 -->
+	<bean id="jmsQueueTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg ref="connectionFactory" />
+		<!-- 非pub/sub模型（发布/订阅），即队列模式 -->
+		<property name="pubSubDomain" value="false" />
+	</bean>
+	
+	<!-- 定义JmsTemplate的Topic类型 -->
+	<bean id="jmsTopicTemplate" class="org.springframework.jms.core.JmsTemplate">
+		<constructor-arg ref="connectionFactory" />
+		<!-- pub/sub模型（发布/订阅） -->
+		<property name="pubSubDomain" value="true" />
+	</bean>
+
+	<!-- 定义 Destination 地址 -->
+	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg value="appdata"/>
+	</bean>
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg value="dorong.topic"/>
+	</bean>
+
+<!--
+	&lt;!&ndash; 定义Queue监听器 &ndash;&gt;
+	<jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="mx_yys_data" ref="QueueReceiver"/>
+	</jms:listener-container>
+
+	&lt;!&ndash; 定义Topic监听器 &ndash;&gt;
+	<jms:listener-container destination-type="topic" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="dorong.topic" ref="TopicReceiver"/>
+	</jms:listener-container>
+-->
+
+	<!-- <jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="mx_yys_data" ref="MXYYSReceiver"/>
+	</jms:listener-container>
+	<jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="appdata" ref="APPDATAReceiver"/>
+	</jms:listener-container>
+	<jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="phonebook" ref="PhoneBookReceiver"/>
+	</jms:listener-container>
+	<jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="mx_wy_data" ref="MXXYKReceiver"/>
+	</jms:listener-container>
+	<jms:listener-container destination-type="queue" container-type="default" connection-factory="connectionFactory" acknowledge="auto">
+		<jms:listener destination="ds_ecommerce_data" ref="DSWYReceiver"/>
+	</jms:listener-container> -->
+
+	<!-- 消息消费者 end -->
+	
+</beans>

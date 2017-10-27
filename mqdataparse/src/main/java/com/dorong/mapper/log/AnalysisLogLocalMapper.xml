@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dorong.mapper.log.AnalysisLogLocalMapper" >
+  <resultMap id="BaseResultMap" type="com.dorong.model.log.AnalysisLogLocal" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_code" property="user_code" jdbcType="VARCHAR" />
+    <result column="authorize_date" property="authorize_date" jdbcType="TIMESTAMP" />
+    <result column="task_begin_time" property="task_begin_time" jdbcType="TIMESTAMP" />
+    <result column="task_end_time" property="task_end_time" jdbcType="TIMESTAMP" />
+    <result column="task_state" property="task_state" jdbcType="VARCHAR" />
+    <result column="state_code" property="state_code" jdbcType="INTEGER" />
+    <result column="spend_time" property="spend_time" jdbcType="BIGINT" />
+    <result column="data_type" property="data_type" jdbcType="VARCHAR" />
+    <result column="data_uri" property="data_uri" jdbcType="VARCHAR" />
+    <result column="create_time" property="create_time" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="modify_time" property="modify_time" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_code, authorize_date, task_begin_time, task_end_time, task_state, state_code, 
+    spend_time, data_type, data_uri, create_time, remark, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from analysis_log_local
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from analysis_log_local
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.dorong.model.log.AnalysisLogLocal" useGeneratedKeys="true" keyProperty="id" >
+    insert into analysis_log_local (id, user_code, authorize_date, 
+      task_begin_time, task_end_time, task_state, 
+      state_code, spend_time, data_type, 
+      data_uri, create_time, remark, 
+      modify_time)
+    values (#{id,jdbcType=BIGINT}, #{user_code,jdbcType=VARCHAR}, #{authorize_date,jdbcType=TIMESTAMP}, 
+      #{task_begin_time,jdbcType=TIMESTAMP}, #{task_end_time,jdbcType=TIMESTAMP}, #{task_state,jdbcType=VARCHAR}, 
+      #{state_code,jdbcType=INTEGER}, #{spend_time,jdbcType=BIGINT}, #{data_type,jdbcType=VARCHAR}, 
+      #{data_uri,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{modify_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dorong.model.log.AnalysisLogLocal" >
+    insert into analysis_log_local
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="user_code != null" >
+        user_code,
+      </if>
+      <if test="authorize_date != null" >
+        authorize_date,
+      </if>
+      <if test="task_begin_time != null" >
+        task_begin_time,
+      </if>
+      <if test="task_end_time != null" >
+        task_end_time,
+      </if>
+      <if test="task_state != null" >
+        task_state,
+      </if>
+      <if test="state_code != null" >
+        state_code,
+      </if>
+      <if test="spend_time != null" >
+        spend_time,
+      </if>
+      <if test="data_type != null" >
+        data_type,
+      </if>
+      <if test="data_uri != null" >
+        data_uri,
+      </if>
+      <if test="create_time != null" >
+        create_time,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="modify_time != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="user_code != null" >
+        #{user_code,jdbcType=VARCHAR},
+      </if>
+      <if test="authorize_date != null" >
+        #{authorize_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task_begin_time != null" >
+        #{task_begin_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task_end_time != null" >
+        #{task_end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task_state != null" >
+        #{task_state,jdbcType=VARCHAR},
+      </if>
+      <if test="state_code != null" >
+        #{state_code,jdbcType=INTEGER},
+      </if>
+      <if test="spend_time != null" >
+        #{spend_time,jdbcType=BIGINT},
+      </if>
+      <if test="data_type != null" >
+        #{data_type,jdbcType=VARCHAR},
+      </if>
+      <if test="data_uri != null" >
+        #{data_uri,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_time != null" >
+        #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dorong.model.log.AnalysisLogLocal" >
+    update analysis_log_local
+    <set >
+      <if test="user_code != null" >
+        user_code = #{user_code,jdbcType=VARCHAR},
+      </if>
+      <if test="authorize_date != null" >
+        authorize_date = #{authorize_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task_begin_time != null" >
+        task_begin_time = #{task_begin_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task_end_time != null" >
+        task_end_time = #{task_end_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="task_state != null" >
+        task_state = #{task_state,jdbcType=VARCHAR},
+      </if>
+      <if test="state_code != null" >
+        state_code = #{state_code,jdbcType=INTEGER},
+      </if>
+      <if test="spend_time != null" >
+        spend_time = #{spend_time,jdbcType=BIGINT},
+      </if>
+      <if test="data_type != null" >
+        data_type = #{data_type,jdbcType=VARCHAR},
+      </if>
+      <if test="data_uri != null" >
+        data_uri = #{data_uri,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null" >
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="modify_time != null" >
+        modify_time = #{modify_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dorong.model.log.AnalysisLogLocal" >
+    update analysis_log_local
+    set user_code = #{user_code,jdbcType=VARCHAR},
+      authorize_date = #{authorize_date,jdbcType=TIMESTAMP},
+      task_begin_time = #{task_begin_time,jdbcType=TIMESTAMP},
+      task_end_time = #{task_end_time,jdbcType=TIMESTAMP},
+      task_state = #{task_state,jdbcType=VARCHAR},
+      state_code = #{state_code,jdbcType=INTEGER},
+      spend_time = #{spend_time,jdbcType=BIGINT},
+      data_type = #{data_type,jdbcType=VARCHAR},
+      data_uri = #{data_uri,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      modify_time = #{modify_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

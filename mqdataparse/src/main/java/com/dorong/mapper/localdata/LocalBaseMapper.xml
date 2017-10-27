@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorong.mapper.localdata.LocalBaseMapper">
+  <resultMap id="BaseResultMap" type="com.dorong.model.localdata.LocalBase">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_code" jdbcType="VARCHAR" property="user_code" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="idcard" jdbcType="VARCHAR" property="idcard" />
+    <result column="sex" jdbcType="BIT" property="sex" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="shebei_cnt" jdbcType="TINYINT" property="shebei_cnt" />
+    <result column="userdaikuan_cnt" jdbcType="INTEGER" property="userdaikuan_cnt" />
+    <result column="core" jdbcType="INTEGER" property="core" />
+    <result column="is_core_350_550" jdbcType="BIT" property="is_core_350_550" />
+    <result column="authorize_date" jdbcType="TIMESTAMP" property="authorize_date" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_code, mobile, name, idcard, sex, age, shebei_cnt, userdaikuan_cnt, core, 
+    is_core_350_550, authorize_date, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from localbase
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from localbase
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dorong.model.localdata.LocalBase" useGeneratedKeys="true" keyProperty="id">
+    insert into ${tableName} (id, user_code, mobile,
+      name, idcard, sex, age, 
+      shebei_cnt, userdaikuan_cnt, core, 
+      is_core_350_550, authorize_date, create_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{user_code,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{sex,jdbcType=BIT}, #{age,jdbcType=TINYINT}, 
+      #{shebei_cnt,jdbcType=TINYINT}, #{userdaikuan_cnt,jdbcType=INTEGER}, #{core,jdbcType=INTEGER}, 
+      #{is_core_350_550,jdbcType=BIT}, #{authorize_date,jdbcType=TIMESTAMP}, #{create_time,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dorong.model.localdata.LocalBase">
+    insert into ${tableName}
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="user_code != null">
+        user_code,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="idcard != null">
+        idcard,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="shebei_cnt != null">
+        shebei_cnt,
+      </if>
+      <if test="userdaikuan_cnt != null">
+        userdaikuan_cnt,
+      </if>
+      <if test="core != null">
+        core,
+      </if>
+      <if test="is_core_350_550 != null">
+        is_core_350_550,
+      </if>
+      <if test="authorize_date != null">
+        authorize_date,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="user_code != null">
+        #{user_code,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=BIT},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="shebei_cnt != null">
+        #{shebei_cnt,jdbcType=TINYINT},
+      </if>
+      <if test="userdaikuan_cnt != null">
+        #{userdaikuan_cnt,jdbcType=INTEGER},
+      </if>
+      <if test="core != null">
+        #{core,jdbcType=INTEGER},
+      </if>
+      <if test="is_core_350_550 != null">
+        #{is_core_350_550,jdbcType=BIT},
+      </if>
+      <if test="authorize_date != null">
+        #{authorize_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dorong.model.localdata.LocalBase">
+    update ${tableName}
+    <set>
+      <if test="user_code != null">
+        user_code = #{user_code,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="idcard != null">
+        idcard = #{idcard,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=BIT},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="shebei_cnt != null">
+        shebei_cnt = #{shebei_cnt,jdbcType=TINYINT},
+      </if>
+      <if test="userdaikuan_cnt != null">
+        userdaikuan_cnt = #{userdaikuan_cnt,jdbcType=INTEGER},
+      </if>
+      <if test="core != null">
+        core = #{core,jdbcType=INTEGER},
+      </if>
+      <if test="is_core_350_550 != null">
+        is_core_350_550 = #{is_core_350_550,jdbcType=BIT},
+      </if>
+      <if test="authorize_date != null">
+        authorize_date = #{authorize_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="has_analy != null">
+        has_analy = #{has_analy,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dorong.model.localdata.LocalBase" useGeneratedKeys="true" keyProperty="id">
+    update ${tableName}
+    set user_code = #{user_code,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      idcard = #{idcard,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=BIT},
+      age = #{age,jdbcType=TINYINT},
+      shebei_cnt = #{shebei_cnt,jdbcType=TINYINT},
+      userdaikuan_cnt = #{userdaikuan_cnt,jdbcType=INTEGER},
+      core = #{core,jdbcType=INTEGER},
+      is_core_350_550 = #{is_core_350_550,jdbcType=BIT},
+      authorize_date = #{authorize_date,jdbcType=TIMESTAMP},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByUserCode" parameterType="com.dorong.model.localdata.LocalBase" useGeneratedKeys="true" keyProperty="id">
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="BEFORE">
+      SELECT id FROM ${tableName} WHERE user_code = #{user_code,jdbcType=VARCHAR}
+    </selectKey>
+    update ${tableName}
+    set mobile = #{mobile,jdbcType=VARCHAR},
+    name = #{name,jdbcType=VARCHAR},
+    idcard = #{idcard,jdbcType=VARCHAR},
+    sex = #{sex,jdbcType=BIT},
+    age = #{age,jdbcType=TINYINT},
+    shebei_cnt = #{shebei_cnt,jdbcType=TINYINT},
+    userdaikuan_cnt = #{userdaikuan_cnt,jdbcType=INTEGER},
+    core = #{core,jdbcType=INTEGER},
+    is_core_350_550 = #{is_core_350_550,jdbcType=BIT},
+    has_analy = NULL,
+    authorize_date = #{authorize_date,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="createTable" parameterType="java.lang.String" >
+      CREATE TABLE IF NOT EXISTS ${tableName} (
+        `id` bigint(20) NOT NULL AUTO_INCREMENT,
+        `user_code` varchar(20) NOT NULL COMMENT '用户唯一标识码',
+        `mobile` varchar(50) DEFAULT NULL COMMENT '手机号码',
+        `name` varchar(50) DEFAULT NULL COMMENT '姓名',
+        `idcard` varchar(50) DEFAULT NULL COMMENT '身份证',
+        `sex` int(1) DEFAULT NULL COMMENT '性别',
+        `age` int(3) DEFAULT NULL COMMENT '年龄',
+        `shebei_cnt` int(10) DEFAULT NULL COMMENT '用户登录设备数',
+        `userdaikuan_cnt` int(11) DEFAULT NULL COMMENT '用户的机构账单数',
+        `core` int(11) DEFAULT NULL COMMENT '芝麻分数',
+        `is_core_350_550` int(1) DEFAULT NULL COMMENT '芝麻信用分是否在[350，550)这个区间',
+        `authorize_date` datetime DEFAULT NULL COMMENT '授权日期',
+        `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+        `has_analy` int(3) DEFAULT NULL COMMENT '是否分析过',
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `user_code_index` (`user_code`) USING BTREE,
+        KEY `mobile_index` (`mobile`) USING BTREE,
+        KEY `has_analy_index` (`has_analy`) USING BTREE
+      ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  </update>
+  <delete id="deleteByBaseId" >
+    delete from ${tableName}
+    where base_id = #{baseId,jdbcType=INTEGER}
+  </delete>
+  <select id="selectIds" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT id, user_code, authorize_date FROM ${tableName} WHERE has_analy IS NULL LIMIT 0, 20
+  </select>
+  <update id="updateAnaly" parameterType="com.dorong.model.localdata.LocalBase">
+    UPDATE ${tableName} SET has_analy = 1 WHERE id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="existTable" resultType="java.lang.Integer"
+          parameterType="java.util.Map">
+    SELECT
+    COUNT(*)
+    FROM
+    INFORMATION_SCHEMA.TABLES
+    WHERE
+    TABLE_NAME = #{tableName}
+    AND TABLE_SCHEMA = #{dbName}
+  </select>
+</mapper>

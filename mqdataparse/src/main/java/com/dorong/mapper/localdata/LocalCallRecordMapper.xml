@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dorong.mapper.localdata.LocalCallRecordMapper">
+  <resultMap id="BaseResultMap" type="com.dorong.model.localdata.LocalCallRecord">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="base_id" jdbcType="INTEGER" property="base_id" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="duration" jdbcType="BIGINT" property="duration" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="type" jdbcType="BIT" property="type" />
+    <result column="type_name" jdbcType="VARCHAR" property="type_name" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, base_id, date, duration, number, type, type_name, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from localcallrecord
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from localcallrecord
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dorong.model.localdata.LocalCallRecord" useGeneratedKeys="true" keyProperty="id">
+    insert into ${tableName} (id, base_id, date,
+      duration, number, type, 
+      type_name, create_time)
+    values (#{id,jdbcType=INTEGER}, #{base_id,jdbcType=INTEGER}, #{date,jdbcType=TIMESTAMP}, 
+      #{duration,jdbcType=BIGINT}, #{number,jdbcType=VARCHAR}, #{type,jdbcType=BIT}, 
+      #{type_name,jdbcType=VARCHAR}, #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dorong.model.localdata.LocalCallRecord">
+    insert into localcallrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="base_id != null">
+        base_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="duration != null">
+        duration,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="type_name != null">
+        type_name,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="base_id != null">
+        #{base_id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="type_name != null">
+        #{type_name,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dorong.model.localdata.LocalCallRecord">
+    update localcallrecord
+    <set>
+      <if test="base_id != null">
+        base_id = #{base_id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duration != null">
+        duration = #{duration,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="type_name != null">
+        type_name = #{type_name,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dorong.model.localdata.LocalCallRecord">
+    update ${tableName}
+    set base_id = #{base_id,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      duration = #{duration,jdbcType=BIGINT},
+      number = #{number,jdbcType=VARCHAR},
+      type = #{type,jdbcType=BIT},
+      type_name = #{type_name,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="createTable" parameterType="java.lang.String" >
+    CREATE TABLE IF NOT EXISTS ${tableName} (
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `base_id` int(20) NOT NULL COMMENT 'base表ID',
+    `date` datetime DEFAULT NULL COMMENT '通话时间',
+    `duration` bigint(100) DEFAULT NULL COMMENT '通话时长',
+    `number` varchar(50) DEFAULT NULL COMMENT '手机号码',
+    `type` int(1) DEFAULT NULL COMMENT '电话类型来去电',
+    `type_name` varchar(50) DEFAULT NULL COMMENT '电话类型来去电',
+    `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+    PRIMARY KEY (`id`),
+    KEY `type_index` (`type`) USING BTREE,
+    KEY `base_id_index` (`base_id`) USING BTREE,
+    KEY `date_index` (`date`) USING BTREE
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  </update>
+
+  <insert id="batchInsert">
+    INSERT INTO ${tableName} (id, base_id, date,
+    duration, number, type,
+    type_name, create_time)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.base_id,jdbcType=INTEGER}, #{item.date,jdbcType=TIMESTAMP},
+      #{item.duration,jdbcType=BIGINT}, #{item.number,jdbcType=VARCHAR}, #{item.type,jdbcType=BIT},
+      #{item.type_name,jdbcType=VARCHAR}, #{item.create_time,jdbcType=TIMESTAMP})
+    </foreach>
+  </insert>
+</mapper>
